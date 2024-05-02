@@ -1,7 +1,6 @@
 package com.example.cookingrecipes.data.network
 
 import com.example.cookingrecipes.data.network.pojo.RandomRecipesResponse
-import com.example.cookingrecipes.data.network.pojo.RecipeDto
 import retrofit2.http.GET
 
 interface ApiService {

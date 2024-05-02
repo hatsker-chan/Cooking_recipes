@@ -68,6 +68,8 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
+    implementation ("androidx.compose.runtime:runtime-livedata:1.6.7")
+
 
     val lifecycle_version = "2.4.0"
 
@@ -95,6 +97,7 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
     // LiveData
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+
 
     //Picasso
     implementation ("com.squareup.picasso:picasso:2.71828")

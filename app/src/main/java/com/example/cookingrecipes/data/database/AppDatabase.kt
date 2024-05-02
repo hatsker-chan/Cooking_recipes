@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities = [RecipeDbModel::class], version = 1, exportSchema = false)
-abstract class AppDatabase: RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
     companion object {
         private var db: AppDatabase? = null
         private val name = "users.db"

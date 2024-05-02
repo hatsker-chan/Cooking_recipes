@@ -4,7 +4,7 @@ interface RecipeRepository {
 
     suspend fun getRandomRecipe(): Recipe
 
-    fun getRandomRecipes(number: Int): List<Recipe>
+    suspend fun getRandomRecipes(number: Int): List<Recipe>
 
     suspend fun loadData()
 }

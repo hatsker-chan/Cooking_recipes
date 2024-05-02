@@ -1,6 +1,6 @@
 package com.example.cookingrecipes.domain
 
-data class InstructionStep (
+data class InstructionStep(
     val number: Int,
     val description: String
 )

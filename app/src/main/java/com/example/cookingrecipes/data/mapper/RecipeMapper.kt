@@ -7,12 +7,25 @@ import com.example.cookingrecipes.data.network.pojo.MeasuresJsonContainer
 import com.example.cookingrecipes.data.network.pojo.RecipeDto
 import com.example.cookingrecipes.domain.Ingredient
 import com.example.cookingrecipes.domain.InstructionStep
+import com.example.cookingrecipes.domain.Recipe
 
 class RecipeMapper {
 
+    fun mapRecipeDbModelToEntity(recipeDbModel: RecipeDbModel): Recipe{
+        return Recipe(
+            id = recipeDbModel.id,
+            name = recipeDbModel.name,
+            ingredients = recipeDbModel.ingredients,
+            steps = recipeDbModel.steps,
+            summaryDescription = recipeDbModel.summaryDescription,
+            sourceUrl = recipeDbModel.sourceUrl,
+            imageUrl = recipeDbModel.imageUrl
+        )
+    }
+
     fun mapRecipeDtoToDbModel(recipeDto: RecipeDto): RecipeDbModel {
         return RecipeDbModel(
-            id = recipeDto.id,
+            id = recipeDto.id ?: 0,
             name = recipeDto.title ?: "",
             ingredients = recipeDto.extendedIngredients.map {
                 mapIngredientDtoToModel(it)
@@ -28,7 +41,7 @@ class RecipeMapper {
         return Ingredient(
             id = ingredientDto.id,
             name = ingredientDto.name ?: "",
-            amount = ingredientDto.amount ?: 0,
+            amount = ingredientDto.amount ?: 0f,
             measure = mapMetricJsonContainerToMeasure(ingredientDto.metricJsonContainer)
         )
     }

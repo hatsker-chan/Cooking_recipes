@@ -26,7 +26,6 @@ class RecipeRepositoryImpl(
     }
 
 
-
     override suspend fun loadData() {
 
         val response = apiService.loadRandomRecipe()
@@ -36,7 +35,7 @@ class RecipeRepositoryImpl(
         }
     }
 
-    suspend fun removeData(){
+    suspend fun removeData() {
         recipeDao.removeRecipes()
     }
 }

@@ -24,12 +24,12 @@ private val DarkColorScheme = darkColorScheme(
 
 private val LightColorScheme = lightColorScheme(
     primary = Color.White,
-    secondary = Color.White,
+    secondary = LightOrange,
     tertiary = Color.White,
     surface = Color.White,
     onPrimary = Color.Black,
     onSecondary = Color.Black,
-    background = Color(0xFFFAFAFA)
+    background = SuperLightOrange
 )
 
 /* Other default colors to override

@@ -35,18 +35,18 @@ fun RecipeCard(
             bitmap = recipe.imageBitmap,
             contentDescription = null,
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .padding(4.dp),
             contentScale = ContentScale.FillWidth
         )
-        Column {
-            recipe.ingredients.forEach {
-                val mes = it.amount
-                Text(
-                    text = "${it.name}: ${it.measure}",
-                    modifier = Modifier.padding(4.dp)
-                )
-            }
-        }
-
+//        Column {
+//            recipe.ingredients.forEach {
+//                val mes = it.amount
+//                Text(
+//                    text = "${it.name}: ${it.measure}",
+//                    modifier = Modifier.padding(4.dp)
+//                )
+//            }
+//        }
     }
 }

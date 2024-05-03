@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Cooking recipes</string>
+    <string name="list_nav_label">Recipes</string>
+    <string name="fav_nav_label">Favourite</string>
 </resources>

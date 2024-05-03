@@ -1,5 +1,6 @@
 package com.example.cookingrecipes.data.mapper
 
+import android.net.Uri
 import androidx.compose.ui.graphics.asImageBitmap
 import com.example.cookingrecipes.data.database.RecipeDbModel
 import com.example.cookingrecipes.data.network.pojo.IngredientDto
@@ -13,8 +14,6 @@ import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
 
 class RecipeMapper {
 
@@ -43,7 +42,7 @@ class RecipeMapper {
             steps = mapStepsJsonContainerToStepsList(recipeDto.analyzedInstructions[0]),
             summaryDescription = recipeDto.summary ?: "",
             sourceUrl = recipeDto.sourceUrl ?: "",
-            imageUrl = recipeDto.image ?: ""
+            imageUrl = recipeDto.image ?: "https://yoomag.ru/image/cache/no_image-500x500.png"
         )
     }
 
@@ -80,7 +79,7 @@ class RecipeMapper {
         return listOf()
     }
 
-    fun titleText(string: String): String{
+    fun titleText(string: String): String {
         return string[0].uppercase() + string.substring(1)
     }
 

@@ -19,6 +19,10 @@ class RecipeRepositoryImpl(
         }[0]
     }
 
+    override suspend fun addRecipeToFav(recipe: Recipe) {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getRandomRecipes(number: Int): List<Recipe> {
         return recipeDao.getRecipes().map {
             mapper.mapRecipeDbModelToEntity(it)
@@ -27,7 +31,6 @@ class RecipeRepositoryImpl(
 
 
     override suspend fun loadData() {
-
         val response = apiService.loadRandomRecipe()
         response.recipes.forEach {
             val recipeDbModel = mapper.mapRecipeDtoToDbModel(it)

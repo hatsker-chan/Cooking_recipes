@@ -1,7 +1,6 @@
 package com.example.cookingrecipes.ui.theme
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ElevatedCard
@@ -17,7 +16,8 @@ import com.example.cookingrecipes.domain.Recipe
 
 @Composable
 fun RecipeCard(
-    recipe: Recipe
+    recipe: Recipe,
+    onRecipeClickListener: () -> Unit
 ) {
     ElevatedCard(
         modifier = Modifier

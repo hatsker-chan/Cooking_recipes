@@ -12,3 +12,4 @@ val Pink40 = Color(0xFF7D5260)
 
 val LightOrange = Color(0xFFFFCB45)
 val SuperLightOrange = Color(0xFFFCE199)
+val LinkColor = Color(0xFF0250C5)

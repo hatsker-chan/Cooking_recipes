@@ -1,6 +1,5 @@
 package com.example.cookingrecipes.data.mapper
 
-import android.net.Uri
 import androidx.compose.ui.graphics.asImageBitmap
 import com.example.cookingrecipes.data.database.RecipeDbModel
 import com.example.cookingrecipes.data.network.pojo.IngredientDto

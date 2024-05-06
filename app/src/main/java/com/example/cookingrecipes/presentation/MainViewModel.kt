@@ -23,12 +23,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     var _recipes: MutableLiveData<List<Recipe>> = MutableLiveData(listOf(Recipe()))
     val recipes: LiveData<List<Recipe>> = _recipes
 
-//    init {
-//        viewModelScope.launch {
+    init {
+        viewModelScope.launch {
 //            repository.removeData()
-//            getRecipes()
-//        }
-//    }
+            getRecipes()
+        }
+    }
 
     fun getRecipes() {
         viewModelScope.launch {

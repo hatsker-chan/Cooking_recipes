@@ -1,17 +1,23 @@
 package com.example.cookingrecipes.ui.theme
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.example.cookingrecipes.domain.Recipe
+import com.squareup.picasso.Picasso
 
 
 @Composable
@@ -23,30 +29,36 @@ fun RecipeCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
+            .clickable {
+                onRecipeClickListener()
+            }
     ) {
         Text(
             text = recipe.name,
             modifier = Modifier
-                .padding(4.dp),
+                .padding(4.dp)
+                .fillMaxWidth(),
             fontSize = 20.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center
+
         )
-        Image(
-            bitmap = recipe.imageBitmap,
+        AsyncImage(
+            model = recipe.imageUrl,
             contentDescription = null,
             modifier = Modifier
                 .fillMaxWidth()
+                .defaultMinSize(100.dp, 100.dp)
                 .padding(4.dp),
             contentScale = ContentScale.FillWidth
         )
-//        Column {
-//            recipe.ingredients.forEach {
-//                val mes = it.amount
-//                Text(
-//                    text = "${it.name}: ${it.measure}",
-//                    modifier = Modifier.padding(4.dp)
-//                )
-//            }
-//        }
+//        Image(
+//            bitmap = Picasso.get().load(recipe.imageUrl).get().asImageBitmap(),
+//            contentDescription = null,
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(4.dp),
+//            contentScale = ContentScale.FillWidth
+//        )
     }
 }

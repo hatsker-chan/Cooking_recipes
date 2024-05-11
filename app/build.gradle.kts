@@ -97,10 +97,14 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version")
     // ViewModel
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
     // LiveData
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
 
 
     //Picasso
     implementation ("com.squareup.picasso:picasso:2.71828")
+    //Coin
+    implementation("io.coil-kt:coil:2.6.0")
+    implementation("io.coil-kt:coil-compose:2.6.0")
 }

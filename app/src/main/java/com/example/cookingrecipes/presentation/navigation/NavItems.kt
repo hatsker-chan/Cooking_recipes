@@ -11,10 +11,10 @@ sealed class NavItems(
     val imageVector: ImageVector,
     val screen: Screen
 ) {
-    object List : NavItems(
+    object Recipes : NavItems(
         titleResId = R.string.list_nav_label,
         imageVector = Icons.Outlined.Search,
-        screen = Screen.RecipesList
+        screen = Screen.RecipesTab
     )
 
     object Favourite : NavItems(

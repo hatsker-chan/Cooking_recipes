@@ -10,9 +10,10 @@ import com.example.cookingrecipes.data.database.AppDatabase
 import com.example.cookingrecipes.data.mapper.RecipeMapper
 import com.example.cookingrecipes.data.network.ApiFactory
 import com.example.cookingrecipes.domain.Recipe
+import com.example.cookingrecipes.ui.theme.RecipeListScreenState
 import kotlinx.coroutines.launch
 
-class MainViewModel(application: Application) : AndroidViewModel(application) {
+class RecipeListViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository = RecipeRepositoryImpl(
         mapper = RecipeMapper(),
@@ -20,8 +21,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         apiService = ApiFactory.apiService
     )
 
-    var _recipes: MutableLiveData<List<Recipe>> = MutableLiveData(listOf(Recipe()))
-    val recipes: LiveData<List<Recipe>> = _recipes
+//    var _recipes: MutableLiveData<Recipes<Recipe>> = MutableLiveData(listOf(Recipe()))
+//    val recipes: LiveData<Recipes<Recipe>> = _recipes
+
+
+
+    private val initialState = RecipeListScreenState.RecipesList(listOf())
+
+    private val _screenState: MutableLiveData<RecipeListScreenState> = MutableLiveData(initialState)
+    val screenState: LiveData<RecipeListScreenState> = _screenState
+
+
 
     init {
         viewModelScope.launch {
@@ -33,8 +43,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun getRecipes() {
         viewModelScope.launch {
 //            repository.loadData()
-            val rs = repository.getRandomRecipes(1)
-            _recipes.value = rs
+            val recipes = repository.getRandomRecipes(1)
+            _screenState.value = RecipeListScreenState.RecipesList(recipes)
         }
     }
 }

@@ -16,9 +16,8 @@ import kotlinx.coroutines.async
 
 class RecipeMapper {
 
-    suspend fun mapRecipeDbModelToEntity(recipeDbModel: RecipeDbModel): Recipe {
-        return CoroutineScope(Dispatchers.IO).async {
-            Recipe(
+    fun mapRecipeDbModelToEntity(recipeDbModel: RecipeDbModel): Recipe {
+        return Recipe(
                 id = recipeDbModel.id,
                 name = recipeDbModel.name,
                 ingredients = recipeDbModel.ingredients,
@@ -26,9 +25,7 @@ class RecipeMapper {
                 summaryDescription = recipeDbModel.summaryDescription,
                 sourceUrl = recipeDbModel.sourceUrl,
                 imageUrl = recipeDbModel.imageUrl,
-                imageBitmap = Picasso.get().load(recipeDbModel.imageUrl).get().asImageBitmap()
             )
-        }.await()
     }
 
     fun mapRecipeDtoToDbModel(recipeDto: RecipeDto): RecipeDbModel {

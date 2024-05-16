@@ -1,4 +1,4 @@
-package com.example.cookingrecipes.ui.theme
+package com.example.cookingrecipes.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

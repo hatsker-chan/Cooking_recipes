@@ -1,4 +1,4 @@
-package com.example.cookingrecipes.ui.theme
+package com.example.cookingrecipes.presentation.recipeList
 
 import com.example.cookingrecipes.domain.Recipe
 
@@ -8,6 +8,6 @@ sealed class RecipeListScreenState {
 
     data class RecipesList(
         val recipes: List<Recipe>
-    ): RecipeListScreenState()
+    ) : RecipeListScreenState()
 
 }

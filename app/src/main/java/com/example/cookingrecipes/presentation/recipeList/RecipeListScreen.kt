@@ -1,4 +1,4 @@
-package com.example.cookingrecipes.ui.theme
+package com.example.cookingrecipes.presentation.recipeList
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.cookingrecipes.domain.Recipe
-import com.example.cookingrecipes.presentation.RecipeListViewModel
 
 @Composable
 fun RecipeListScreen(

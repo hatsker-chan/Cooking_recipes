@@ -1,7 +1,6 @@
-package com.example.cookingrecipes.ui.theme
+package com.example.cookingrecipes.presentation.recipeInfo
 
 import android.app.Application
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -37,12 +36,10 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.text.htmlEncode
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.example.cookingrecipes.domain.Recipe
-import com.example.cookingrecipes.presentation.RecipeInfoViewModel
-import com.example.cookingrecipes.presentation.RecipeInfoViewModelFactory
+import com.example.cookingrecipes.ui.theme.LinkColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,14 +51,14 @@ fun RecipeInfo(
     val viewModel: RecipeInfoViewModel = viewModel(
         factory = RecipeInfoViewModelFactory(
             application = LocalContext.current.applicationContext as Application,
-            recipe = recipe)
-
+            recipe = recipe
+        )
     )
     val screenState = viewModel.screenState.observeAsState(RecipeInfoScreenState.Initial)
     val uriHandler = LocalUriHandler.current
 
 
-    when(val currentState = screenState.value){
+    when (val currentState = screenState.value) {
         is RecipeInfoScreenState.RecipeInfo -> {
             val curRecipe = currentState.recipe
             Scaffold(
@@ -89,7 +86,6 @@ fun RecipeInfo(
                     )
                 }
             ) {
-                Log.d("TAG", it.toString())
                 Column(
                     modifier = Modifier
                         .verticalScroll(rememberScrollState())
@@ -127,7 +123,10 @@ fun RecipeInfo(
                     val annotatedString = curRecipe.sourceUrl.getLinkedText()
                     ClickableText(
                         text = annotatedString,
-                        style = TextStyle(fontSize = 16.sp, textDecoration = TextDecoration.Underline),
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            textDecoration = TextDecoration.Underline
+                        ),
                         onClick = {
                             annotatedString.getStringAnnotations(it, it)
                                 .firstOrNull()?.let { annotatedStr ->

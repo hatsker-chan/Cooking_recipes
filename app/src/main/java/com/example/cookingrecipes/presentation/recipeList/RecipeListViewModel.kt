@@ -1,4 +1,4 @@
-package com.example.cookingrecipes.presentation
+package com.example.cookingrecipes.presentation.recipeList
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -9,8 +9,6 @@ import com.example.cookingrecipes.data.RecipeRepositoryImpl
 import com.example.cookingrecipes.data.database.AppDatabase
 import com.example.cookingrecipes.data.mapper.RecipeMapper
 import com.example.cookingrecipes.data.network.ApiFactory
-import com.example.cookingrecipes.domain.Recipe
-import com.example.cookingrecipes.ui.theme.RecipeListScreenState
 import kotlinx.coroutines.launch
 
 class RecipeListViewModel(application: Application) : AndroidViewModel(application) {
@@ -25,12 +23,10 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
 //    val recipes: LiveData<Recipes<Recipe>> = _recipes
 
 
-
     private val initialState = RecipeListScreenState.RecipesList(listOf())
 
     private val _screenState: MutableLiveData<RecipeListScreenState> = MutableLiveData(initialState)
     val screenState: LiveData<RecipeListScreenState> = _screenState
-
 
 
     init {

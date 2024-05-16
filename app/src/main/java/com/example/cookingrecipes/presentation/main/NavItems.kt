@@ -1,10 +1,11 @@
-package com.example.cookingrecipes.presentation.navigation
+package com.example.cookingrecipes.presentation.main
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.cookingrecipes.R
+import com.example.cookingrecipes.presentation.navigation.Screen
 
 sealed class NavItems(
     val titleResId: Int,

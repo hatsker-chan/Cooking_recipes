@@ -1,4 +1,4 @@
-package com.example.cookingrecipes.ui.theme
+package com.example.cookingrecipes.presentation.main
 
 
 import androidx.compose.foundation.layout.Column
@@ -9,19 +9,18 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.cookingrecipes.domain.Recipe
+import com.example.cookingrecipes.presentation.FavouriteRecipes
+import com.example.cookingrecipes.presentation.main.NavItems.Favourite
+import com.example.cookingrecipes.presentation.main.NavItems.Recipes
 import com.example.cookingrecipes.presentation.navigation.AppNavGraph
-import com.example.cookingrecipes.presentation.navigation.NavItems.Favourite
-import com.example.cookingrecipes.presentation.navigation.NavItems.Recipes
 import com.example.cookingrecipes.presentation.navigation.rememberNavigationState
+import com.example.cookingrecipes.presentation.recipeInfo.RecipeInfo
+import com.example.cookingrecipes.presentation.recipeList.RecipeListScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -69,7 +68,7 @@ fun HomeScreen() {
                 )
             },
             favRecipesContent = { FavouriteRecipes() },
-            recipeInfoContent = {recipe ->
+            recipeInfoContent = { recipe ->
                 RecipeInfo(
                     paddingValues = paddingValues,
                     recipe = recipe,

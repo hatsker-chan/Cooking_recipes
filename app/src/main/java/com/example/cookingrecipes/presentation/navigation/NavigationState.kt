@@ -20,7 +20,7 @@ class NavigationState(
         }
     }
 
-    fun navigateToRecipeInfo(recipe: Recipe){
+    fun navigateToRecipeInfo(recipe: Recipe) {
 
         navHostController.navigate(Screen.RecipeInfo.getRouteWithArgs(recipe))
     }

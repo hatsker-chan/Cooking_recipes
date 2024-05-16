@@ -1,6 +1,5 @@
 package com.example.cookingrecipes.data.mapper
 
-import androidx.compose.ui.graphics.asImageBitmap
 import com.example.cookingrecipes.data.database.RecipeDbModel
 import com.example.cookingrecipes.data.network.pojo.IngredientDto
 import com.example.cookingrecipes.data.network.pojo.InstructionStepsJsonContainer
@@ -9,23 +8,19 @@ import com.example.cookingrecipes.data.network.pojo.RecipeDto
 import com.example.cookingrecipes.domain.Ingredient
 import com.example.cookingrecipes.domain.InstructionStep
 import com.example.cookingrecipes.domain.Recipe
-import com.squareup.picasso.Picasso
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 
 class RecipeMapper {
 
     fun mapRecipeDbModelToEntity(recipeDbModel: RecipeDbModel): Recipe {
         return Recipe(
-                id = recipeDbModel.id,
-                name = recipeDbModel.name,
-                ingredients = recipeDbModel.ingredients,
-                steps = recipeDbModel.steps,
-                summaryDescription = recipeDbModel.summaryDescription,
-                sourceUrl = recipeDbModel.sourceUrl,
-                imageUrl = recipeDbModel.imageUrl,
-            )
+            id = recipeDbModel.id,
+            name = recipeDbModel.name,
+            ingredients = recipeDbModel.ingredients,
+            steps = recipeDbModel.steps,
+            summaryDescription = recipeDbModel.summaryDescription,
+            sourceUrl = recipeDbModel.sourceUrl,
+            imageUrl = recipeDbModel.imageUrl,
+        )
     }
 
     fun mapRecipeDtoToDbModel(recipeDto: RecipeDto): RecipeDbModel {

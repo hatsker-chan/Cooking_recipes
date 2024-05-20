@@ -90,7 +90,6 @@ fun RecipeInfo(
                                     },
                                     modifier = Modifier.padding(0.dp, 0.dp, 16.dp, 0.dp)
                                 ) {
-
                                     Icon(
                                         painter = painterResource(
                                             id = if (currentState.isFav)
@@ -105,14 +104,6 @@ fun RecipeInfo(
                                 }
 
                             }
-
-//                            Icon(
-//                                modifier = Modifier
-//                                    .size(50.dp)
-//                                    .padding(8.dp),
-//                                imageVector = Icons.Outlined.Favorite,
-//                                contentDescription = null
-//                            )
                         },
 
                         navigationIcon = {

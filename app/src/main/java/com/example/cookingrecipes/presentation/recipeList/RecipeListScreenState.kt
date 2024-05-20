@@ -6,6 +6,8 @@ sealed class RecipeListScreenState {
 
     object Initial : RecipeListScreenState()
 
+    object Loading: RecipeListScreenState()
+
     data class RecipesList(
         val recipes: List<Recipe>
     ) : RecipeListScreenState()

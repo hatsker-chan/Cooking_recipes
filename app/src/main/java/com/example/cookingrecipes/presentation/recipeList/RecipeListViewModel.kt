@@ -10,6 +10,7 @@ import com.example.cookingrecipes.data.RecipeRepositoryImpl
 import com.example.cookingrecipes.data.database.AppDatabase
 import com.example.cookingrecipes.data.mapper.RecipeMapper
 import com.example.cookingrecipes.data.network.ApiFactory
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class RecipeListViewModel(application: Application) : AndroidViewModel(application) {
@@ -32,6 +33,8 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
 
     init {
         viewModelScope.launch {
+            _screenState.value = RecipeListScreenState.Loading
+            delay(5000)
             repository.loadData()
             getRecipes()
         }

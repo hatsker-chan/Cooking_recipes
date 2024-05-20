@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.cookingrecipes.domain.Recipe
 
 @Dao
 interface RecipeDao {
@@ -17,4 +18,9 @@ interface RecipeDao {
     @Query("DELETE FROM recipe_info")
     suspend fun removeRecipes()
 
+    @Query("SELECT * FROM recipe_info WHERE id =:recipeId")
+    suspend fun getFavouriteRecipe(recipeId: Int): RecipeDbModel?
+
+    @Query("DELETE FROM recipe_info WHERE id =:recipeId")
+    suspend fun removeFavouriteRecipe(recipeId: Int)
 }

@@ -1,5 +1,6 @@
 package com.example.cookingrecipes.data.mapper
 
+import android.content.Entity
 import com.example.cookingrecipes.data.database.RecipeDbModel
 import com.example.cookingrecipes.data.network.pojo.IngredientDto
 import com.example.cookingrecipes.data.network.pojo.InstructionStepsJsonContainer
@@ -19,7 +20,19 @@ class RecipeMapper {
             steps = recipeDbModel.steps,
             summaryDescription = recipeDbModel.summaryDescription,
             sourceUrl = recipeDbModel.sourceUrl,
-            imageUrl = recipeDbModel.imageUrl,
+            imageUrl = recipeDbModel.imageUrl
+        )
+    }
+
+    fun mapEntityToDbModel(recipeEntity: Recipe): RecipeDbModel {
+        return RecipeDbModel(
+            id = recipeEntity.id,
+            name = recipeEntity.name,
+            ingredients = recipeEntity.ingredients,
+            steps = recipeEntity.steps,
+            summaryDescription = recipeEntity.summaryDescription,
+            sourceUrl = recipeEntity.sourceUrl,
+            imageUrl = recipeEntity.imageUrl
         )
     }
 
@@ -30,7 +43,7 @@ class RecipeMapper {
             ingredients = recipeDto.extendedIngredients.map {
                 mapIngredientDtoToModel(it)
             },
-            steps = mapStepsJsonContainerToStepsList(recipeDto.analyzedInstructions[0]),
+            steps = mapStepsJsonContainerToStepsList(recipeDto.analyzedInstructions.firstOrNull()),
             summaryDescription = recipeDto.summary ?: "",
             sourceUrl = recipeDto.sourceUrl ?: "",
             imageUrl = recipeDto.image ?: "https://yoomag.ru/image/cache/no_image-500x500.png"
@@ -50,7 +63,7 @@ class RecipeMapper {
     fun mapMetricJsonContainerToMeasure(measuresJsonContainer: MeasuresJsonContainer?): String {
         measuresJsonContainer?.let {
             val metricDto = measuresJsonContainer.metric
-            return "${metricDto?.amount} ${metricDto?.unitShort}"
+            return "${metricDto?.unitShort}"
         }
         return ""
     }

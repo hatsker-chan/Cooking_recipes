@@ -7,15 +7,19 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.ViewModelProvider
 import com.example.cookingrecipes.presentation.ActivityResultTest
+import com.example.cookingrecipes.presentation.recipeList.RecipeListViewModel
 import com.example.cookingrecipes.ui.theme.CookingRecipesTheme
 
 class MainActivity : ComponentActivity() {
 
+    private val viewModel by lazy {
+        ViewModelProvider(this)[RecipeListViewModel::class.java]
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
 
         setContent {
             CookingRecipesTheme(darkTheme = false, dynamicColor = false) {
@@ -24,10 +28,14 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-//                    HomeScreen()
-                    ActivityResultTest()
+                    HomeScreen()
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        viewModel.removeRecipes()
+        super.onDestroy()
     }
 }

@@ -9,4 +9,10 @@ interface RecipeRepository {
     suspend fun getRandomRecipes(number: Int): List<Recipe>
 
     suspend fun loadData()
+
+    suspend fun removeData()
+
+    suspend fun getFavRecipeById(id: Int): Recipe?
+
+    suspend fun removeRecipeFromFav(recipe: Recipe)
 }

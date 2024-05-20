@@ -20,25 +20,42 @@ class RecipeRepositoryImpl(
     }
 
     override suspend fun addRecipeToFav(recipe: Recipe) {
-        TODO("Not yet implemented")
+        recipeDao.insertRecipe(mapper.mapEntityToDbModel(recipe))
     }
 
     override suspend fun getRandomRecipes(number: Int): List<Recipe> {
-        return recipeDao.getRecipes().map {
-            mapper.mapRecipeDbModelToEntity(it)
+//        return recipeDao.getRecipes().map {
+//            mapper.mapRecipeDbModelToEntity(it)
+//        }
+
+        return apiService.loadRandomRecipes(10).recipes.map {
+            mapper.mapRecipeDbModelToEntity(mapper.mapRecipeDtoToDbModel(it))
         }
     }
 
 
     override suspend fun loadData() {
-        val response = apiService.loadRandomRecipe()
+        val response = apiService.loadRandomRecipes(10)
         response.recipes.forEach {
             val recipeDbModel = mapper.mapRecipeDtoToDbModel(it)
             recipeDao.insertRecipe(recipeDbModel)
         }
     }
 
-    suspend fun removeData() {
+    override suspend fun removeData() {
         recipeDao.removeRecipes()
+    }
+
+    override suspend fun getFavRecipeById(id: Int): Recipe? {
+        val favRecipe = recipeDao.getFavouriteRecipe(id)
+        return if (favRecipe == null){
+            null
+        } else {
+            mapper.mapRecipeDbModelToEntity(favRecipe)
+        }
+    }
+
+    override suspend fun removeRecipeFromFav(recipe: Recipe){
+        recipeDao.removeFavouriteRecipe(recipe.id)
     }
 }

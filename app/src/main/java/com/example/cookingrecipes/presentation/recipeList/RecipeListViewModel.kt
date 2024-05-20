@@ -1,6 +1,7 @@
 package com.example.cookingrecipes.presentation.recipeList
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -31,16 +32,21 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
 
     init {
         viewModelScope.launch {
-//            repository.removeData()
+            repository.loadData()
             getRecipes()
         }
     }
 
     fun getRecipes() {
         viewModelScope.launch {
-//            repository.loadData()
-            val recipes = repository.getRandomRecipes(1)
+            val recipes = repository.getRandomRecipes(10)
             _screenState.value = RecipeListScreenState.RecipesList(recipes)
+        }
+    }
+
+    fun removeRecipes(){
+        viewModelScope.launch {
+            repository.removeData()
         }
     }
 }

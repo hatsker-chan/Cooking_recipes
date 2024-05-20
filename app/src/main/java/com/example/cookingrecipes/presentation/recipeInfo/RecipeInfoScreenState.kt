@@ -7,7 +7,8 @@ sealed class RecipeInfoScreenState {
     object Initial : RecipeInfoScreenState()
 
     data class RecipeInfo(
-        val recipe: Recipe
+        val recipe: Recipe,
+        val isFav: Boolean
     ) : RecipeInfoScreenState()
 
 }

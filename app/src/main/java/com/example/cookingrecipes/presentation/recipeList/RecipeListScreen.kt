@@ -1,17 +1,20 @@
 package com.example.cookingrecipes.presentation.recipeList
 
+import android.view.WindowInsets.Side
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,7 +36,8 @@ fun RecipeListScreen(
                 paddingValues = paddingValues,
                 recipes = currentState.recipes,
                 viewModel = viewModel,
-                onRecipeClickListener = onRecipeClickListener
+                onRecipeClickListener = onRecipeClickListener,
+                currentState.nextDataIsLoading
             )
         }
 
@@ -56,7 +60,8 @@ private fun ShowRecipes(
     paddingValues: PaddingValues,
     recipes: List<Recipe>,
     viewModel: RecipeListViewModel,
-    onRecipeClickListener: (Recipe) -> Unit
+    onRecipeClickListener: (Recipe) -> Unit,
+    nextDataIsLoading: Boolean
 ) {
     LazyColumn(
         modifier = Modifier.padding(paddingValues)
@@ -69,6 +74,22 @@ private fun ShowRecipes(
                 }
             )
             Spacer(modifier = Modifier.height(10.dp))
+        }
+        item {
+            if (nextDataIsLoading){
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight(),
+                    contentAlignment = Alignment.Center
+                ){
+                    CircularProgressIndicator()
+                }
+            } else {
+                SideEffect {
+                    viewModel.loadNextRecipes()
+                }
+            }
         }
     }
 }

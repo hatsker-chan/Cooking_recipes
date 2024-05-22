@@ -1,14 +1,14 @@
 package com.example.cookingrecipes.domain
 
-interface RecipeRepository {
+import androidx.lifecycle.LiveData
 
-    suspend fun getRandomRecipe(): Recipe
+interface RecipeRepository {
 
     suspend fun addRecipeToFav(recipe: Recipe)
 
     suspend fun getRandomRecipes(number: Int): List<Recipe>
 
-    suspend fun loadData()
+    fun getFavRecipes(): LiveData<List<Recipe>>
 
     suspend fun removeData()
 

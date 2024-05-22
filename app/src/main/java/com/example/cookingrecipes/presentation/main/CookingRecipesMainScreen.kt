@@ -14,7 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.cookingrecipes.presentation.FavouriteRecipes
+import com.example.cookingrecipes.presentation.favRecipeList.FavRecipeListScreen
 import com.example.cookingrecipes.presentation.main.NavItems.Favourite
 import com.example.cookingrecipes.presentation.main.NavItems.Recipes
 import com.example.cookingrecipes.presentation.navigation.AppNavGraph
@@ -67,7 +67,13 @@ fun HomeScreen() {
                     }
                 )
             },
-            favRecipesContent = { FavouriteRecipes() },
+            favRecipesContent = {
+                FavRecipeListScreen(paddingValues = paddingValues,
+                    onRecipeClickListener = {
+                        navigationState.navigateToRecipeInfo(it)
+                    }
+                )
+            },
             recipeInfoContent = { recipe ->
                 RecipeInfo(
                     paddingValues = paddingValues,

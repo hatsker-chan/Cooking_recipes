@@ -25,17 +25,17 @@ class RecipeInfoViewModel(application: Application, recipe: Recipe) :
         MutableLiveData(RecipeInfoScreenState.Initial)
     val screenState: LiveData<RecipeInfoScreenState> = _screenState
 
-    fun loadData(recipe: Recipe){
+    fun loadData(recipe: Recipe) {
         viewModelScope.launch {
             val isFav = repository.getFavRecipeById(recipe.id) != null
             _screenState.value = RecipeInfoScreenState.RecipeInfo(recipe, isFav)
         }
     }
 
-    fun changeRecipeIsFav(recipe: Recipe){
+    fun changeRecipeIsFav(recipe: Recipe) {
         viewModelScope.launch {
             val isFav = repository.getFavRecipeById(recipe.id) != null
-            if (isFav){
+            if (isFav) {
                 repository.removeRecipeFromFav(recipe)
             } else {
                 repository.addRecipeToFav(recipe)
@@ -45,7 +45,7 @@ class RecipeInfoViewModel(application: Application, recipe: Recipe) :
     }
 
     init {
-        viewModelScope.launch{
+        viewModelScope.launch {
             loadData(recipe)
         }
     }

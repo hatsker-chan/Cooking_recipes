@@ -8,7 +8,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelProvider
-import com.example.cookingrecipes.presentation.ActivityResultTest
 import com.example.cookingrecipes.presentation.recipeList.RecipeListViewModel
 import com.example.cookingrecipes.ui.theme.CookingRecipesTheme
 

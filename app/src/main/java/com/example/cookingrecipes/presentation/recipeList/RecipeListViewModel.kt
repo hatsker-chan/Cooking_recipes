@@ -1,7 +1,6 @@
 package com.example.cookingrecipes.presentation.recipeList
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -21,10 +20,6 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
         apiService = ApiFactory.apiService
     )
 
-//    var _recipes: MutableLiveData<Recipes<Recipe>> = MutableLiveData(listOf(Recipe()))
-//    val recipes: LiveData<Recipes<Recipe>> = _recipes
-
-
     private val initialState = RecipeListScreenState.RecipesList(listOf())
 
     private val _screenState: MutableLiveData<RecipeListScreenState> = MutableLiveData(initialState)
@@ -34,20 +29,28 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
     init {
         viewModelScope.launch {
             _screenState.value = RecipeListScreenState.Loading
-            delay(5000)
-            repository.loadData()
             getRecipes()
         }
     }
 
-    fun getRecipes() {
+    fun loadNextRecipes() {
+        _screenState.value = RecipeListScreenState.RecipesList(
+            recipes = repository.recipeList,
+            nextDataIsLoading = true
+        )
+
+        getRecipes()
+    }
+
+    private fun getRecipes() {
         viewModelScope.launch {
-            val recipes = repository.getRandomRecipes(10)
-            _screenState.value = RecipeListScreenState.RecipesList(recipes)
+            repository.getRandomRecipes(10)
+            delay(3000)
+            _screenState.value = RecipeListScreenState.RecipesList(repository.recipeList)
         }
     }
 
-    fun removeRecipes(){
+    fun removeRecipes() {
         viewModelScope.launch {
             repository.removeData()
         }

@@ -18,5 +18,6 @@ data class RecipeDbModel(
     val steps: List<InstructionStep>,
     val summaryDescription: String,
     val sourceUrl: String,
-    val imageUrl: String
+    val imageUrl: String,
+    val timeStamps: Long
 )

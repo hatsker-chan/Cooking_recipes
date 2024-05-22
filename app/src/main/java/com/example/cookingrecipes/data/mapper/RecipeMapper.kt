@@ -1,6 +1,5 @@
 package com.example.cookingrecipes.data.mapper
 
-import android.content.Entity
 import com.example.cookingrecipes.data.database.RecipeDbModel
 import com.example.cookingrecipes.data.network.pojo.IngredientDto
 import com.example.cookingrecipes.data.network.pojo.InstructionStepsJsonContainer
@@ -32,7 +31,8 @@ class RecipeMapper {
             steps = recipeEntity.steps,
             summaryDescription = recipeEntity.summaryDescription,
             sourceUrl = recipeEntity.sourceUrl,
-            imageUrl = recipeEntity.imageUrl
+            imageUrl = recipeEntity.imageUrl,
+            timeStamps = System.currentTimeMillis()
         )
     }
 
@@ -46,7 +46,8 @@ class RecipeMapper {
             steps = mapStepsJsonContainerToStepsList(recipeDto.analyzedInstructions.firstOrNull()),
             summaryDescription = recipeDto.summary ?: "",
             sourceUrl = recipeDto.sourceUrl ?: "",
-            imageUrl = recipeDto.image ?: "https://yoomag.ru/image/cache/no_image-500x500.png"
+            imageUrl = recipeDto.image ?: "https://yoomag.ru/image/cache/no_image-500x500.png",
+            timeStamps = System.currentTimeMillis()
         )
     }
 

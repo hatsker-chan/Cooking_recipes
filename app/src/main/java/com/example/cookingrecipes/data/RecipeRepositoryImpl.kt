@@ -1,5 +1,7 @@
 package com.example.cookingrecipes.data
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.map
 import com.example.cookingrecipes.data.database.RecipeDao
 import com.example.cookingrecipes.data.mapper.RecipeMapper
 import com.example.cookingrecipes.data.network.ApiService
@@ -12,33 +14,28 @@ class RecipeRepositoryImpl(
     val apiService: ApiService
 ) : RecipeRepository {
 
-
-    override suspend fun getRandomRecipe(): Recipe {
-        return recipeDao.getRecipes().map {
-            mapper.mapRecipeDbModelToEntity(it)
-        }[0]
-    }
+    private var _recipeList = mutableSetOf<Recipe>()
+    val recipeList: List<Recipe>
+        get() = _recipeList.toList()
 
     override suspend fun addRecipeToFav(recipe: Recipe) {
         recipeDao.insertRecipe(mapper.mapEntityToDbModel(recipe))
     }
 
     override suspend fun getRandomRecipes(number: Int): List<Recipe> {
-//        return recipeDao.getRecipes().map {
-//            mapper.mapRecipeDbModelToEntity(it)
-//        }
-
-        return apiService.loadRandomRecipes(10).recipes.map {
+        val recipes = apiService.loadRandomRecipes(10).recipes.map {
             mapper.mapRecipeDbModelToEntity(mapper.mapRecipeDtoToDbModel(it))
         }
+        _recipeList.addAll(recipes)
+        return recipeList
     }
 
-
-    override suspend fun loadData() {
-        val response = apiService.loadRandomRecipes(10)
-        response.recipes.forEach {
-            val recipeDbModel = mapper.mapRecipeDtoToDbModel(it)
-            recipeDao.insertRecipe(recipeDbModel)
+    override fun getFavRecipes(): LiveData<List<Recipe>> {
+        val recipeDbList = recipeDao.getRecipes()
+        return recipeDbList.map {list ->
+            list.map {
+                mapper.mapRecipeDbModelToEntity(it)
+            }.reversed()
         }
     }
 
@@ -48,14 +45,14 @@ class RecipeRepositoryImpl(
 
     override suspend fun getFavRecipeById(id: Int): Recipe? {
         val favRecipe = recipeDao.getFavouriteRecipe(id)
-        return if (favRecipe == null){
+        return if (favRecipe == null) {
             null
         } else {
             mapper.mapRecipeDbModelToEntity(favRecipe)
         }
     }
 
-    override suspend fun removeRecipeFromFav(recipe: Recipe){
+    override suspend fun removeRecipeFromFav(recipe: Recipe) {
         recipeDao.removeFavouriteRecipe(recipe.id)
     }
 }
